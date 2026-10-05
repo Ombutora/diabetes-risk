@@ -83,6 +83,40 @@ NOMINAL_CATEGORIES = {
 CATEGORICAL_COLS = list(ORDINAL_MAPPINGS) + BINARY_COLS + list(NOMINAL_CATEGORIES)
 RAW_FEATURES = NUMERIC_COLS + CATEGORICAL_COLS
 
+# Columns that had missing values in the raw data; the imputer was trained on
+# these gaps, so they may be omitted at prediction time. BMI is derivable from
+# height and weight.
+OPTIONAL_FEATURES = [
+    "Age", "Height_cm", "Weight_kg", "BMI", "Blood_Glucose", "HbA1c",
+    "Total_Cholesterol", "HDL", "LDL", "Triglycerides", "Physical_Activity_Level",
+    "Exercise_Hours_Per_Week", "Daily_Walking_Minutes", "Sleep_Hours", "Medication_Adherence",
+]
+
+# Observed min/max in the raw training data. Predictions outside these ranges
+# are extrapolations and are flagged by the API.
+TRAINING_RANGES = {
+    "Age": (18, 90),
+    "Height_cm": (145, 195),
+    "Weight_kg": (45, 130),
+    "BMI": (11.9, 61.7),
+    "Waist_Circumference_cm": (60, 140),
+    "Blood_Glucose": (70, 250),
+    "HbA1c": (4.5, 12.5),
+    "Fasting_Blood_Sugar": (65, 220),
+    "Insulin_Level": (2, 45),
+    "Blood_Pressure_Systolic": (90, 190),
+    "Blood_Pressure_Diastolic": (60, 120),
+    "Total_Cholesterol": (120, 320),
+    "HDL": (25, 90),
+    "LDL": (50, 220),
+    "Triglycerides": (60, 400),
+    "Heart_Rate": (50, 120),
+    "Exercise_Hours_Per_Week": (0, 10),
+    "Daily_Walking_Minutes": (0, 180),
+    "Sleep_Hours": (3, 10),
+    "Daily_Water_Intake_L": (1, 5),
+}
+
 # ---------------------------------------------------------------------------
 # Training & model
 # ---------------------------------------------------------------------------
