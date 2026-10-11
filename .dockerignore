@@ -1,0 +1,18 @@
+.git
+.gitignore
+.dockerignore
+Dockerfile
+data/
+notebooks/
+reports/
+tests/
+**/__pycache__
+**/*.pyc
+**/.ipynb_checkpoints
+.env
+.venv
+venv
+# Only the trained pipeline and its metadata are needed in the image
+models/*
+!models/diabetes_risk_pipeline.pkl
+!models/diabetes_risk_pipeline.json
